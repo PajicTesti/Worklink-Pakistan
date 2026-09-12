@@ -19,6 +19,7 @@
       --light: #f5faf7;
       --white: #ffffff;
       --border: #dce9e1;
+      --danger: #b00020;
     }
 
     * {
@@ -82,6 +83,7 @@
       border: 1px solid transparent;
       cursor: pointer;
       transition: 0.2s ease;
+      font-size: 0.95rem;
     }
 
     .btn-primary {
@@ -102,6 +104,15 @@
     .btn-outline:hover {
       color: var(--white);
       background: var(--primary);
+    }
+
+    .btn-danger {
+      color: var(--white);
+      background: var(--danger);
+    }
+
+    .btn-danger:hover {
+      opacity: 0.85;
     }
 
     .hero {
@@ -166,7 +177,10 @@
     }
 
     .search-row input,
-    .search-row select {
+    .search-row select,
+    .lead-form input,
+    .lead-form select,
+    .admin-login-form input {
       width: 100%;
       min-width: 0;
       padding: 13px;
@@ -270,12 +284,78 @@
       color: var(--dark);
     }
 
+    .lead-form {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      text-align: left;
+    }
+
+    .lead-form .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .lead-form button {
+      width: 100%;
+    }
+
     footer {
       padding: 24px 0;
       color: var(--muted);
       font-size: 0.9rem;
       text-align: center;
       border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Admin section */
+    #admin-section {
+      display: none;
+      background: var(--light);
+      padding: 60px 0;
+    }
+
+    .admin-login-form {
+      max-width: 420px;
+      margin: 0 auto 30px;
+      display: grid;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .admin-login-form button {
+      width: 100%;
+    }
+
+    .admin-table-wrap {
+      overflow-x: auto;
+      background: var(--white);
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--light);
+      font-weight: 700;
     }
 
     @media (max-width: 800px) {
@@ -294,6 +374,10 @@
 
       .hero-card {
         max-width: 520px;
+      }
+
+      .lead-form {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -353,20 +437,22 @@
         <div class="hero-card">
           <h3>What do you need help with?</h3>
 
-          <div class="search-row">
-            <input type="text" placeholder="Search a service" />
-            <select>
-              <option>Select city</option>
-              <option>Islamabad</option>
-              <option>Rawalpindi</option>
-              <option>Lahore</option>
-              <option>Karachi</option>
-            </select>
-          </div>
+          <form id="search-form">
+            <div class="search-row">
+              <input type="text" id="search-input" placeholder="Search a service" />
+              <select id="search-city">
+                <option value="">Select city</option>
+                <option>Islamabad</option>
+                <option>Rawalpindi</option>
+                <option>Lahore</option>
+                <option>Karachi</option>
+              </select>
+            </div>
 
-          <a href="#join" class="btn btn-primary" style="width: 100%; text-align: center;">
-            Search Professionals
-          </a>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Search Professionals
+            </button>
+          </form>
 
           <div class="mini-list">
             <div class="mini-item">
@@ -449,17 +535,255 @@
 
     <section class="cta" id="join">
       <div class="container">
-        <h2>Ready to get started?</h2>
+        <h2>Be the first to know when we launch</h2>
         <p>
-          Join the growing WorkLink community as a customer or service provider.
+          Leave your email and we'll notify you when WorkLink arrives in your city.
         </p>
-        <a href="mailto:hello@example.com" class="btn btn-primary">Contact Us</a>
+
+        <form id="lead-form" class="lead-form">
+          <input type="text" id="lead-name" placeholder="Your name" />
+          <input type="email" id="lead-email" placeholder="Your email" required />
+          <select id="lead-service">
+            <option value="">I'm interested in...</option>
+            <option>Home & Local Services</option>
+            <option>Freelance Services</option>
+            <option>Professional Roles</option>
+          </select>
+          <select id="lead-city">
+            <option value="">Select your city</option>
+            <option>Islamabad</option>
+            <option>Rawalpindi</option>
+            <option>Lahore</option>
+            <option>Karachi</option>
+          </select>
+          <div class="full-width">
+            <button type="submit" class="btn btn-primary">Notify Me</button>
+          </div>
+        </form>
       </div>
     </section>
   </main>
 
+  <section id="admin-section">
+    <div class="container">
+      <h2 style="margin-bottom: 20px;">Admin Panel</h2>
+
+      <form id="admin-login" class="admin-login-form">
+        <input type="email" id="admin-email" placeholder="Admin email" required />
+        <input type="password" id="admin-password" placeholder="Password" required />
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+
+      <div id="admin-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3>Leads</h3>
+          <button class="btn btn-danger" onclick="logoutAdmin()">Logout</button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Service Interest</th>
+                <th>City</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-body">
+              <tr><td colspan="5">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    © 2025 WorkLink Pakistan. All rights reserved.
+    © 2025 WorkLink Pakistan. All rights reserved. |
+    <a onclick="toggleAdmin()">Admin Login</a>
   </footer>
+
+  <script>
+    const SUPABASE_URL = "__PAKAI_SUPABASE_URL__";
+    const SUPABASE_KEY = "__PAKAI_SUPABASE_ANON_KEY__";
+
+    // Change these credentials before going live!
+    const ADMIN_EMAIL = "contact@worklink.com";
+    const ADMIN_PASSWORD = "worklink2025";
+    const ADMIN_HEADER_KEY = "worklink-admin-secret";
+
+    const leadForm = document.getElementById("lead-form");
+    const searchForm = document.getElementById("search-form");
+    const adminSection = document.getElementById("admin-section");
+    const adminLoginForm = document.getElementById("admin-login");
+    const adminPanel = document.getElementById("admin-panel");
+    const leadsTableBody = document.getElementById("leads-table-body");
+
+    // ---------- Lead capture ----------
+    leadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("lead-name").value.trim();
+      const email = document.getElementById("lead-email").value.trim();
+      const service = document.getElementById("lead-service").value;
+      const city = document.getElementById("lead-city").value;
+
+      if (!email) {
+        alert("Please enter your email address.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_KEY,
+            Authorization: `Bearer ${SUPABASE_KEY}`
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            service_interest: service,
+            city
+          })
+        });
+
+        if (res.ok) {
+          leadForm.reset();
+          alert("Thank you! We will notify you soon.");
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      } catch (err) {
+        alert("Network error. Please try again.");
+      }
+    });
+
+    // ---------- Search form behavior ----------
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const query = document.getElementById("search-input").value.trim();
+      const city = document.getElementById("search-city").value;
+
+      if (!query) {
+        alert("Please enter a service to search.");
+        return;
+      }
+
+      if (!city) {
+        alert("Please select a city.");
+        return;
+      }
+
+      alert(
+        `Search for "${query}" in ${city} is coming soon. Leave your email below and we'll notify you when it's available.`
+      );
+
+      // Prefill lead form
+      const serviceSelect = document.getElementById("lead-service");
+      const lowerQuery = query.toLowerCase();
+      if (lowerQuery.includes("home") || lowerQuery.includes("house")) {
+        serviceSelect.value = "Home & Local Services";
+      } else if (lowerQuery.includes("free") || lowerQuery.includes("design") || lowerQuery.includes("develop")) {
+        serviceSelect.value = "Freelance Services";
+      } else {
+        serviceSelect.value = "Professional Roles";
+      }
+
+      document.getElementById("lead-city").value = city;
+      document.getElementById("lead-email").focus();
+    });
+
+    // ---------- Admin ----------
+    function toggleAdmin() {
+      const isHidden = adminSection.style.display === "none";
+      adminSection.style.display = isHidden ? "block" : "none";
+      if (isHidden) {
+        document.getElementById("admin-email").value = "";
+        document.getElementById("admin-password").value = "";
+        adminLoginForm.style.display = "grid";
+        adminPanel.style.display = "none";
+      }
+    }
+
+    adminLoginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("admin-email").value.trim();
+      const password = document.getElementById("admin-password").value;
+
+      if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+        alert("Invalid admin credentials.");
+        return;
+      }
+
+      adminLoginForm.style.display = "none";
+      adminPanel.style.display = "block";
+      await loadLeads();
+    });
+
+    async function loadLeads() {
+      leadsTableBody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
+
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/leads?select=*&order=created_at.desc`,
+          {
+            headers: {
+              apikey: SUPABASE_KEY,
+              Authorization: `Bearer ${SUPABASE_KEY}`,
+              "x-admin-key": ADMIN_HEADER_KEY
+            }
+          }
+        );
+
+        const leads = await res.json();
+        if (!Array.isArray(leads)) throw new Error("Unexpected response");
+
+        if (leads.length === 0) {
+          leadsTableBody.innerHTML =
+            '<tr><td colspan="5">No leads yet.</td></tr>';
+          return;
+        }
+
+        leadsTableBody.innerHTML = leads
+          .map((lead) => {
+            const date = lead.created_at
+              ? new Date(lead.created_at).toLocaleString()
+              : "";
+            return `
+              <tr>
+                <td>${escapeHtml(lead.name || "")}</td>
+                <td>${escapeHtml(lead.email)}</td>
+                <td>${escapeHtml(lead.service_interest || "")}</td>
+                <td>${escapeHtml(lead.city || "")}</td>
+                <td>${date}</td>
+              </tr>
+            `;
+          })
+          .join("");
+      } catch (err) {
+        leadsTableBody.innerHTML =
+          '<tr><td colspan="5">Failed to load leads. Check your admin key and RLS policy.</td></tr>';
+      }
+    }
+
+    function logoutAdmin() {
+      adminPanel.style.display = "none";
+      adminLoginForm.style.display = "grid";
+      document.getElementById("admin-password").value = "";
+      alert("Logged out.");
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
 </body>
 </html>
