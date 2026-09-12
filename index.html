@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkLink Pakistan | Find Trusted Talent</title>
+  <meta
+    name="description"
+    content="WorkLink Pakistan connects people with trusted workers and professional talent."
+  />
+
+  <style>
+    :root {
+      --primary: #0b7a53;
+      --primary-dark: #075c3e;
+      --accent: #f2b84b;
+      --dark: #10231c;
+      --muted: #66736d;
+      --light: #f5faf7;
+      --white: #ffffff;
+      --border: #dce9e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      color: var(--white);
+      background: var(--primary);
+    }
+
+    .hero {
+      padding: 92px 0 80px;
+      background:
+        radial-gradient(circle at 85% 20%, #dff5e9 0, transparent 28%),
+        var(--light);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      max-width: 650px;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(16, 35, 28, 0.08);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 18px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .search-row input,
+    .search-row select {
+      width: 100%;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mini-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--light);
+      font-size: 0.9rem;
+    }
+
+    .mini-item span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-heading {
+      max-width: 620px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--white);
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      background: #e3f5ea;
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      text-align: center;
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 580px;
+      margin: 0 auto 24px;
+      color: #dcefe5;
+    }
+
+    .cta .btn-primary {
+      background: var(--accent);
+      color: var(--dark);
+    }
+
+    footer {
+      padding: 24px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+
+      .hero {
+        padding: 62px 0;
+      }
+
+      .hero-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        max-width: 520px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        height: 64px;
+      }
+
+      .nav-links .btn {
+        padding: 9px 13px;
+        font-size: 0.85rem;
+      }
+
+      .search-row {
+        flex-direction: column;
+      }
+
+      section {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">WorkLink Pakistan</a>
+
+        <div class="nav-links">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#services">Services</a>
+          <a href="#join" class="btn btn-primary">Join Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Work made simple</div>
+          <h1>Find trusted talent for every kind of work.</h1>
+          <p>
+            WorkLink Pakistan connects customers with reliable workers,
+            freelancers, and professional talent—all in one place.
+          </p>
+
+          <div class="actions">
+            <a href="#join" class="btn btn-primary">Find a Service</a>
+            <a href="#join" class="btn btn-outline">Offer Your Skills</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>What do you need help with?</h3>
+
+          <div class="search-row">
+            <input type="text" placeholder="Search a service" />
+            <select>
+              <option>Select city</option>
+              <option>Islamabad</option>
+              <option>Rawalpindi</option>
+              <option>Lahore</option>
+              <option>Karachi</option>
+            </select>
+          </div>
+
+          <a href="#join" class="btn btn-primary" style="width: 100%; text-align: center;">
+            Search Professionals
+          </a>
+
+          <div class="mini-list">
+            <div class="mini-item">
+              <strong>Home Services</strong>
+              <span>Explore</span>
+            </div>
+            <div class="mini-item">
+              <strong>Freelancers</strong>
+              <span>Explore</span>
+            </div>
+            <div class="mini-item">
+              <strong>Professional Talent</strong>
+              <span>Explore</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <h2>A better way to get work done</h2>
+          <p>Simple, trusted, and built for customers and service providers.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">1</div>
+            <h3>Choose a service</h3>
+            <p>Tell us what you need and discover suitable professionals nearby.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">2</div>
+            <h3>Connect with talent</h3>
+            <p>Compare profiles, skills, availability, and customer reviews.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">3</div>
+            <h3>Get it done</h3>
+            <p>Work with confidence through a convenient and transparent platform.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" style="background: var(--light);">
+      <div class="container">
+        <div class="section-heading">
+          <h2>From everyday tasks to expert work</h2>
+          <p>
+            Start with essential services today and access professional talent
+            as your needs grow.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">⌂</div>
+            <h3>Home & Local Services</h3>
+            <p>Find dependable support for everyday needs and household tasks.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✦</div>
+            <h3>Freelance Services</h3>
+            <p>Hire creative, technical, and business freelancers for your projects.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">↗</div>
+            <h3>Professional Roles</h3>
+            <p>Connect with experienced specialists and growing businesses.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="join">
+      <div class="container">
+        <h2>Ready to get started?</h2>
+        <p>
+          Join the growing WorkLink community as a customer or service provider.
+        </p>
+        <a href="mailto:hello@example.com" class="btn btn-primary">Contact Us</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 WorkLink Pakistan. All rights reserved.
+  </footer>
+</body>
+</html>
